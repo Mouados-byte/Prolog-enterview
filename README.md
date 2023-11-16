@@ -33,7 +33,7 @@ Pour réussir l'entretien, l'utilisateur doit fournir des réponses positives à
 ## Comment Exécuter
 
 1. Assurez-vous d'avoir un interpréteur Prolog installé (par exemple, SWI-Prolog).
-2. Chargez le fichier Prolog (par exemple, `consult('interview_simulation.pl').`).
+2. Chargez le fichier Prolog (par exemple, `consult('interview.pl').`).
 3. Démarrez l'entretien en exécutant le prédicat `demarrer_entretien.` dans la console Prolog.
 
 ## Utilisation Exemplaire
