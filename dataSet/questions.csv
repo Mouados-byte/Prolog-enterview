@@ -1,0 +1,11 @@
+id,question,parent
+1,Quelle est la fonction principale du HTML dans le développement web ?,0
+2,Expliquez la différence entre les éléments de niveau bloc et les éléments en ligne dans HTML.,1
+3,Quels sont les sélecteurs CSS ?,0
+4,Pouvez-vous fournir un exemple de propriété CSS qui change la mise en page visuelle d'un élément ?,3
+5,Décrivez une fermeture (closure) en JavaScript.,0
+6,Donnez un exemple de situation où vous pourriez utiliser une fermeture (closure).,5
+7,Qu'est-ce que le modèle de boîte CSS ?,0
+8,Quelle est la différence entre les pseudo-classes et les pseudo-éléments en CSS ?,7
+9,Qu'est-ce que le responsive design ?,0
+10,Expliquez la différence entre les méthodes GET et POST en HTTP.,0
