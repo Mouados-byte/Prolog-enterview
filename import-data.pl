@@ -1,33 +1,29 @@
 :- use_module(library(csv)).
 
-% Prédicat pour charger les questions à partir d'un fichier CSV
+:- dynamic question/2.
+:- dynamic response/2.
+:- dynamic get_all_responses/2.
+
+% Prédicat pour charger les questions à partir d un fichier CSV
 load_questions(CheminFichier) :-
-    csv_read_file(CheminFichier, Lignes, []),
-    maplist(assert_question, Lignes).
+    csv_read_file(CheminFichier, Lignes, [functor(question), arity(3)]),
+    maplist(assert_question, Lignes),
+    findall(Question, question(_, Question), Questions),
 
 % Prédicat pour affirmer chaque question
-
-% Ce prédicat "assert_question" permet d'ajouter une question à la base de connaissances.
-% Il prend en entrée une ligne de données et l'insère dans la base de connaissances sous la forme d'un prédicat "question".
 assert_question(Ligne) :-
-    Ligne =.. [ligne|Donnees],
-    assertz(question(Donnees)).
+    assertz(question(Ligne)).
 
-% Prédicat pour charger les réponses à partir d'un fichier CSV
+% Prédicat pour charger les questions à partir d un fichier CSV
 load_responses(CheminFichier) :-
-    csv_read_file(CheminFichier, Lignes, []),
-    maplist(assert_response, Lignes).
+    csv_read_file(CheminFichier, Lignes, [functor(response), arity(5)]),
+    maplist(assert_response, Lignes),
+    findall(Response, response(_, Response), Responses),
 
-% Prédicat pour affirmer chaque réponse
+% Prédicat pour affirmer chaque response
 assert_response(Ligne) :-
-    Ligne =.. [ligne|Donnees],
-    assertz(response(Donnees)).
+    assertz(response(Ligne)).
 
-% Exemple de requête pour récupérer les questions et leurs réponses
-fetch_question_responses(IDQuestion, TexteReponse, Score) :-
-    question([IDQuestion, TexteQuestion, IDParent]),
-    response([_, IDQuestion, TexteReponse, Score]).
+get_question_string(QuestionID, QuestionString) :-
+    question(QuestionID, QuestionString, _).
 
-% Pour exécuter l'importation, appelez les prédicats avec les chemins des fichiers CSV :
-% ?- load_questions('./questions.csv').
-% ?- load_responses('./responses.csv').

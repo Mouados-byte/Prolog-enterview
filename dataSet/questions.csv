@@ -9,3 +9,5 @@ id,question,parent
 8,Quelle est la différence entre les pseudo-classes et les pseudo-éléments en CSS ?,7
 9,Qu'est-ce que le responsive design ?,0
 10,Expliquez la différence entre les méthodes GET et POST en HTTP.,0
+11,Qu'est-ce que JavaScript ?,0
+12,Quelle est la différence entre == et === en JavaScript ?,11

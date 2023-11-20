@@ -1,22 +1,25 @@
-id,question,response,note
-1,1,Il structure le contenu sur le web.,4
-2,1,C'est pour le style de la page web.,1
-3,2,Les éléments de niveau bloc forment un bloc visible sur une page.,5
-4,2,Les éléments en ligne ne commencent pas sur une nouvelle ligne.,3
-5,3,Les sélecteurs sont des motifs utilisés pour sélectionner les éléments à styliser.,5
-6,3,Ils sont un moyen de mettre en œuvre l'héritage dans CSS.,2
-7,4,La propriété 'margin' peut ajuster l'espace autour des éléments.,4
-8,4,La propriété 'color' change la couleur d'un élément.,1
-9,5,Une fermeture est une fonction combinée à son environnement lexical.,5
-10,5,C'est une erreur en JavaScript.,0
-11,6,Pour maintenir l'état dans un contexte d'exécution asynchrone.,5
-12,6,Pour arrêter une boucle en cours d'exécution.,1
-13,7,Le modèle de boîte CSS définit la façon dont les éléments HTML sont rendus dans le navigateur.,0
-14,7,Il comprend les propriétés de largeur, hauteur, marge, bordure et rembourrage.,0
-15,8,Les pseudo-classes sont utilisées pour sélectionner des éléments dans un état spécifique ou une relation avec d'autres éléments.,7
-16,8,Les pseudo-éléments sont utilisés pour styliser une partie spécifique d'un élément.,7
-17,9,Le responsive design est une approche de conception qui vise à rendre les sites web adaptatifs à différents appareils et tailles d'écran.,0
-18,9,Cela implique l'utilisation de techniques telles que les media queries et la mise en page flexible.,0
-19,10,La méthode GET est utilisée pour récupérer des données à partir d'un serveur, tandis que la méthode POST est utilisée pour envoyer des données au serveur.,0
-20,10,La méthode GET ajoute les données dans l'URL, tandis que la méthode POST les envoie dans le corps de la requête.,0
-
+id,question,response,note,next_question
+1,1,Il structure le contenu sur le web.,4,1
+2,1,C'est pour le style de la page web.,1,1
+3,2,Les éléments de niveau bloc forment un bloc visible sur une page.,5,1
+4,2,Les éléments en ligne ne commencent pas sur une nouvelle ligne.,3,1
+5,3,Les sélecteurs sont des motifs utilisés pour sélectionner les éléments à styliser.,5,1
+6,3,Ils sont un moyen de mettre en œuvre l'héritage dans CSS.,2,1
+7,4,La propriété 'margin' peut ajuster l'espace autour des éléments.,4,1
+8,4,La propriété 'color' change la couleur d'un élément.,1,1
+9,5,Une fermeture est une fonction combinée à son environnement lexical.,5,1
+10,5,C'est une erreur en JavaScript.,0,4
+11,6,Pour maintenir l'état dans un contexte d'exécution asynchrone.,5,1
+12,6,Pour arrêter une boucle en cours d'exécution.,1,2
+13,7,Le modèle de boîte CSS définit la façon dont les éléments HTML sont rendus dans le navigateur.,0,1
+14,7,Il comprend les propriétés de largeur hauteur marge bordure et rembourrage.,0,6
+15,8,Les pseudo-classes sont utilisées pour sélectionner des éléments dans un état spécifique ou une relation avec d'autres éléments.,7,1
+16,8,Les pseudo-éléments sont utilisés pour styliser une partie spécifique d'un élément.,7,10
+17,9,Le responsive design est une approche de conception qui vise à rendre les sites web adaptatifs à différents appareils et tailles d'écran.,0,1
+18,9,Cela implique l'utilisation de techniques telles que les media queries et la mise en page flexible.,0,2
+19,10,La méthode GET est utilisée pour récupérer des données à partir d'un serveur tandis que la méthode POST est utilisée pour envoyer des données au serveur.,0,1
+20,10,La méthode GET ajoute les données dans l'URL tandis que la méthode POST les envoie dans le corps de la requête.,0,1
+1,1,Next.js,4,4
+2,3,Bootstrap,5,9
+3,5,Un concept qui permet à une fonction de conserver l'environnement lexical dans lequel elle a été créée.,5,6
+4,8,:hover est une pseudo-classe qui permet de sélectionner et de styliser un élément lorsqu'il est survolé par la souris.,5,12
