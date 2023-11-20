@@ -1,107 +1,66 @@
 /* programming_language.pro
-  programming language recommendation game.
+   Programming language recommendation system.
+   Start with ?- start. */
 
-    start with ?- start. */
+start :-
+    hypothesize(Language),
+    write('I recommend you to use: '), write(Language), nl,
+    undo.
 
-start :- hypothesize(Language),
-      write('I recommend you to use: '),
-      write(Language),
-      nl,
-      undo.
+hypothesize(javascript) :- language(javascript).
+hypothesize(python)     :- language(python).
+hypothesize(java)       :- language(java).
+hypothesize(csharp)     :- language(csharp).
+hypothesize(ruby)       :- language(ruby).
+hypothesize(swift)      :- language(swift).
+hypothesize(go)         :- language(go).
+hypothesize(php)        :- language(php).
+hypothesize(typescript) :- language(typescript).
+hypothesize(kotlin)     :- language(kotlin).
+hypothesize(unknown).   /* no diagnosis */
 
-/* hypotheses to be tested */
-hypothesize(javascript)   :- javascript, !.
-hypothesize(python)       :- python, !.
-hypothesize(java)         :- java, !.
-hypothesize(csharp)       :- csharp, !.
-hypothesize(ruby)          :- ruby, !.
-hypothesize(swift)         :- swift, !.
-hypothesize(go)            :- go, !.
-hypothesize(php)           :- php, !.
-hypothesize(typescript)    :- typescript, !.
-hypothesize(kotlin)        :- kotlin, !.
-hypothesize(unknown).      /* no diagnosis */
+language(Lang) :-
+    attributes(Lang, Attrs), check_attributes(Attrs).
 
-/* programming language identification rules */
-javascript :- scripting_language, 
-              widely_used,
-              verify(has_asynchronous_support),
-              verify(is_dynamic_typed).
-python :- scripting_language, 
-           widely_used,
-           object_oriented,
-           verify(is_easy_to_learn),
-           verify(has_clear_syntax).
-java :- object_oriented, 
-        widely_used,
-        verify(is_platform_independent),
-        verify(is_static_typed).
-csharp :- object_oriented, 
-          verify(is_used_for_windows),
-          verify(has_strong_type_system).
-ruby :- scripting_language,
-        verify(has_elegant_syntax),
-        verify(is_used_for_web_development),
-        verify(supports_metaprogramming).
-swift :- object_oriented, 
-         verify(is_used_for_ios),
-         verify(is_fast),
-         verify(has_clear_syntax).
-go :- compiled_language, 
-      verify(is_used_for_system_programming),
-      verify(is_concurrent),
-      verify(is_static_typed).
-php :- scripting_language, 
-       widely_used,
-       object_oriented, 
-       verify(is_used_for_web_development),
-       verify(is_dynamic_typed).
-typescript :- scripting_language,
-              widely_used,
-              object_oriented,
-              verify(has_elegant_syntax),
-              verify(is_used_for_web_development),
-              verify(has_asynchronous_support),
-              verify(is_superset_of_javascript),
-              verify(is_static_typed).
-kotlin :- object_oriented, 
-          verify(is_used_for_android),
-          verify(is_interoperable_with_java),
-          verify(is_concise).
-          
-/* classification rules */
-widely_used   :- verify(is_popular), !.
-widely_used   :- verify(is_new_and_fresh).
-scripting_language  :- verify(is_interpreted), !.
-scripting_language  :- verify(is_high_level).
-object_oriented     :- verify(supports_objects), !.
-object_oriented     :- verify(is_modular).
-compiled_language   :- verify(is_compiled), !.
-compiled_language   :- verify(is_efficient).
+attributes(javascript, [scripting_language, widely_used, has_asynchronous_support, is_dynamic_typed]).
+attributes(python,     [scripting_language, widely_used, object_oriented, is_easy_to_learn, has_clear_syntax]).
+attributes(java,       [object_oriented, widely_used, is_platform_independent, is_static_typed]).
+attributes(csharp,     [object_oriented, is_used_for_windows, has_strong_type_system]).
+attributes(ruby,       [scripting_language, has_elegant_syntax, is_used_for_web_development, supports_metaprogramming]).
+attributes(swift,      [object_oriented, is_used_for_ios, is_fast, has_clear_syntax]).
+attributes(go,         [compiled_language, is_used_for_system_programming, is_concurrent, is_static_typed]).
+attributes(php,        [scripting_language, widely_used, object_oriented, is_used_for_web_development, is_dynamic_typed]).
+attributes(typescript, [scripting_language, widely_used, object_oriented, has_elegant_syntax, is_used_for_web_development, has_asynchronous_support, is_superset_of_javascript, is_static_typed]).
+attributes(kotlin,     [object_oriented, is_used_for_android, is_interoperable_with_java, is_concise]).
 
-/* how to ask questions */
+check_attributes([]).
+check_attributes([H|T]) :- verify(H), check_attributes(T).
+
+classification(widely_used,       [is_popular, is_new_and_fresh]).
+classification(scripting_language, [is_interpreted, is_high_level]).
+classification(object_oriented,    [supports_objects, is_modular]).
+classification(compiled_language,  [is_compiled, is_efficient]).
+
+check_classification(Class) :-
+    classification(Class, Attrs), member(Attr, Attrs), verify(Attr), !.
+
+scripting_language :- check_classification(scripting_language).
+object_oriented    :- check_classification(object_oriented).
+compiled_language  :- check_classification(compiled_language).
+widely_used        :- check_classification(widely_used).
+
+/* asking questions */
 ask(Question) :-
-    write('Does the programming language have the following attribute: '),
-    write(Question),
-    write('? '),
-    read(Response),
-    nl,
-    ( 
-        (Response == yes ; Response == y) -> assert(yes(Question)) ; 
-        assert(no(Question)), 
-        fail
-     ).
+    format('Does the programming language have the following attribute: ~w? ', [Question]),
+    read(Response), nl,
+    ( (Response == yes ; Response == y) -> assertz(yes(Question)) ; assertz(no(Question)), fail ).
 
 :- dynamic yes/1,no/1.
 
-/* How to verify something */
-verify(S) :-
-   (
-        yes(S) -> true ;
-        (no(S) -> fail ; ask(S))
-   ).
+/* verifying predicates */
+verify(S) :- yes(S) -> true ; (no(S) -> fail ; ask(S)).
 
 /* undo all yes/no assertions */
-undo :- retract(yes(_)),fail. 
-undo :- retract(no(_)),fail.
+undo :- retract(yes(_)), fail. 
+undo :- retract(no(_)), fail.
 undo.
